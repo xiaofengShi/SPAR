@@ -27,6 +27,8 @@ pip install -r requirements.txt
    ```
    ![demo](./figs/search_demo.jpg)
 
+   search result details can be found: [here](./figs/search_results_2025-07-22.json)
+
 3. **Use Service Interface**
    ```bash
    python3 run_spr_agent.py $benchname
