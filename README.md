@@ -33,7 +33,7 @@ pip install -r requirements.txt
    ```
    Supported `benchname`: `OwnBenchmark` | `AutoScholarQuery`
 
-## 📁 Project Structure
+##  Project Structure
 
 | File | Description |
 |------|-------------|
@@ -80,12 +80,12 @@ Preview:
 
 ![main result](./figs/spar_main_result.png)
 
-## 📝 Output Description
+##  Output Description
 
 - Retrieval results saved to: `./figs/search_results_2025-07-22.json`
 - Visualization charts saved in `./figs/` directory
 
-## 🔍 Features
+##  Features
 
 ### 🎯 Advanced Search Mode
 - **Query Rewriting**: Automatic query expansion and refinement
@@ -128,7 +128,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 Issues and Pull Requests are welcome to help improve the SPAR system!
 
-## 🛠️ Troubleshooting
+##  Troubleshooting
 
 ### Common Issues
 
