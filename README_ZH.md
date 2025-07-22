@@ -33,7 +33,7 @@ pip install -r requirements.txt
    ```
    支持的 `benchname`: `OwnBenchmark` | `AutoScholarQuery`
 
-## 📁 项目结构
+## 项目结构
 
 | 文件 | 功能描述 |
 |------|----------|
@@ -82,12 +82,12 @@ pip install graphviz
 
 ![main result](./figs/spar_main_result.png)
 
-## 📝 输出说明
+## 输出说明
 
 - 检索结果保存路径: `./figs/search_results_2025-07-22.json`
 - 可视化图表保存在 `./figs/` 目录
 
-## 📖 引用
+## 引用
 
 如果您使用了 SPAR 系统，请引用我们的工作：
 
