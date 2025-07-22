@@ -1,0 +1,61 @@
+# === 自定义目录 ===
+database/
+log/
+
+# === Python 编译输出 ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# === 虚拟环境 ===
+venv/
+env/
+.venv/
+.env/
+
+# === Jupyter Notebook Checkpoints ===
+.ipynb_checkpoints/
+
+# === 配置文件/临时文件 ===
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+.DS_Store
+
+# === 本地环境变量文件（如 dotenv）===
+.env
+*.env
+
+# === VSCode/IDE 配置 ===
+.vscode/
+.idea/
+
+# === pip 缓存 / wheel 文件 ===
+*.whl
+pip-wheel-metadata/
+*.egg-info/
+dist/
+build/
+
+# === SQLite 等本地数据库文件 ===
+*.sqlite
+*.sqlite3
+*.db
+*.db3
+*.sql
+
+# === pytest 缓存 ===
+.pytest_cache/
+
+# === mypy 类型检查缓存 ===
+.mypy_cache/
+
+# === coverage 覆盖率文件 ===
+.coverage
+htmlcov/
+
+# === IPython 历史 ===
+~/.ipython/
