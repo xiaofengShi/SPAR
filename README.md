@@ -1,7 +1,8 @@
 # SPAR: Scholar Paper Retrieval with LLM-based Agents for Enhanced Academic Search
 
-Paper URL: https://arxiv.org/abs/2507.15245
-Dataset URL: [Coming Soon]
+Paper URL: [arxiv:2507.15245](https://arxiv.org/abs/2507.15245)
+
+Dataset URL: [SPARBench](https://huggingface.co/datasets/MonteXiaofeng/SPARBench)
 
 An intelligent academic paper retrieval system based on Large Language Model (LLM) agents, providing search, retrieval, and re-ranking capabilities.
 
