@@ -1,7 +1,7 @@
 # SPAR: Scholar Paper Retrieval with LLM-based Agents for Enhanced Academic Search
 
 论文地址：https://arxiv.org/abs/2507.15245
-数据集地址：xxx
+数据集地址：[SPARBench](https://huggingface.co/datasets/XiaofengAlg/SPARBench)
 
 基于大语言模型代理的学术论文智能检索系统，提供搜索、检索和重排序功能。
 

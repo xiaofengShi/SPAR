@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use SPAR or SPARBench, please cite the accompanying paper."
+title: SPAR
+type: software
+authors:
+  - family-names: Shi
+    given-names: Xiaofeng
+repository-code: https://github.com/xiaofengShi/SPAR
+url: https://arxiv.org/abs/2507.15245
+license: MIT
+preferred-citation:
+  type: article
+  title: "SPAR: Scholar Paper Retrieval with LLM-based Agents for Enhanced Academic Search"
+  authors:
+    - family-names: Shi
+      given-names: Xiaofeng
+    - family-names: Li
+      given-names: Yuduo
+    - family-names: Kou
+      given-names: Qian
+    - family-names: Yu
+      given-names: Longbin
+    - family-names: Xie
+      given-names: Jinxin
+    - family-names: Zhou
+      given-names: Hua
+  year: 2025
+  doi: 10.48550/arXiv.2507.15245
+  url: https://arxiv.org/abs/2507.15245
