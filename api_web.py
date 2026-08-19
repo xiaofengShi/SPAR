@@ -725,15 +725,15 @@ def search_paper_via_query_from_semantic(query, max_paper_num=15, end_date=None)
 
     api_key = S2_API_KEY
     # Define headers with API key
-    headers = {"x-api-key": api_key}
+    headers = {"x-api-key": api_key} if api_key else {}
     # Send the API request
     for _ in range(4):
         response = requests.get(
             "https://api.semanticscholar.org/graph/v1/paper/search",
             params=query_params,
+            headers=headers,
             timeout=10,
         )
-        # headers=headers)
         time.sleep(0.1)
 
         if response.status_code == 200:
@@ -806,7 +806,10 @@ def google_search_arxiv_id(query, try_num=4, num=10, end_date=""):
     )
 
     GOOGLE_SERPER_KEY = os.getenv("GOOGLE_SERPER_KEY", "xxx")
-    logger.info(f"use GOOGLE_SERPER_KEY: {GOOGLE_SERPER_KEY}")
+    logger.info(
+        "Google Serper API key configured: %s",
+        bool(GOOGLE_SERPER_KEY and GOOGLE_SERPER_KEY != "xxx"),
+    )
     headers = {"X-API-KEY": GOOGLE_SERPER_KEY, "Content-Type": "application/json"}
     assert headers["X-API-KEY"] != "your google keys", "add your google search key!!!"
 
@@ -1218,4 +1221,3 @@ def get_doc_info_from_api(query, try_num=5, end_date=""):
 # pubmed_search = search_from_pubmed("lung caner")
 # print(len(pubmed_search))
 # print(pubmed_search[0])
-

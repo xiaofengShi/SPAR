@@ -1,9 +1,17 @@
 # SPAR: Scholar Paper Retrieval with LLM-based Agents for Enhanced Academic Search
 
-论文地址：https://arxiv.org/abs/2507.15245
-数据集地址：[SPARBench](https://huggingface.co/datasets/XiaofengAlg/SPARBench)
+[![论文](https://img.shields.io/badge/arXiv-2507.15245-b31b1b.svg)](https://arxiv.org/abs/2507.15245)
+[![数据集](https://img.shields.io/badge/Hugging%20Face-SPARBench-ffbd21.svg)](https://huggingface.co/datasets/XiaofengAlg/SPARBench)
+[![许可证: MIT](https://img.shields.io/badge/License-MIT-2563eb.svg)](LICENSE)
+[![引用](https://img.shields.io/badge/Cite-CITATION.cff-0f766e.svg)](CITATION.cff)
 
-基于大语言模型代理的学术论文智能检索系统，提供搜索、检索和重排序功能。
+[English](README.md)
+
+SPAR 是一个多 Agent 学术检索框架，结合 RefChain 查询拆解、查询演化、引文感知探索与重排序。配套的 **SPARBench** 提供专家标注的相关性标签，用于系统化评测。
+
+> 如果使用 SPAR 或 SPARBench，请引用
+> [SPAR 论文](https://arxiv.org/abs/2507.15245)。机器可读引用信息见
+> [CITATION.cff](CITATION.cff)。
 
 ![overview](./figs/graph_example.png)
 
@@ -18,7 +26,9 @@ pip install -r requirements.txt
 ### 基本配置
 
 1. **配置 API 密钥**
-   - 编辑 [`global_config.py`](global_config.py)，设置 GPT 相关密钥和搜索参数
+   - 通过 `OPENAI_API_KEY`、`GOOGLE_SERPER_KEY` 和可选的 `S2_API_KEY`
+     环境变量提供服务凭据，请勿提交 API 密钥
+   - 编辑 [`global_config.py`](global_config.py)，设置非敏感搜索参数
    - 如使用本地模型，参考 [`local_request_v2.py`](local_request_v2.py) 配置 `MODEL_CONFIGS`
 
 2. **启动可视化界面**

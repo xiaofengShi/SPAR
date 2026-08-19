@@ -61,6 +61,8 @@ SLEEP_TIME_LLM = 2.0
 # =============================================================================
 DO_FUSION_JUDGE = True
 FUSION_TEMPLATE = "AUTOMATIC"  # Options: "WITHEXPLAIN", "AUTOMATIC"
+# Compatibility name used by the public search pipeline.
+FUSION_TEMP = FUSION_TEMPLATE
 
 # Query processing settings
 QUERY_NUM_PRUNED = 2  # Number of queries to use for search
@@ -79,6 +81,8 @@ PASS_SIM_THRESHOLD = 0.5
 
 # Search routes configuration
 SEARCH_ROUTES: List[str] = ["arxiv", "openalex"]
+# Compatibility name used by the public search pipeline and CLI.
+SEARCH_ROUTE = SEARCH_ROUTES
 
 # =============================================================================
 # EXTERNAL API KEYS
@@ -86,8 +90,10 @@ SEARCH_ROUTES: List[str] = ["arxiv", "openalex"]
 # Register at: https://google.serper.dev/search
 GOOGLE_SERPER_KEY = os.getenv("GOOGLE_SERPER_KEY", "xxx")
 
-# Semantic Scholar API key (currently invalid)
-SEMANTIC_SCHOLAR_API_KEY = os.getenv("S2_API_KEY", "")
+# Semantic Scholar API key (optional; anonymous requests remain supported)
+S2_API_KEY = os.getenv("S2_API_KEY", "")
+# Backward-compatible descriptive alias for callers that prefer the long name.
+SEMANTIC_SCHOLAR_API_KEY = S2_API_KEY
 
 # =============================================================================
 # SEARCH FEATURES

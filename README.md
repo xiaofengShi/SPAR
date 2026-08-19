@@ -1,10 +1,20 @@
 # SPAR: Scholar Paper Retrieval with LLM-based Agents for Enhanced Academic Search
 
-Paper URL: [arxiv:2507.15245](https://arxiv.org/abs/2507.15245)
+[![Paper](https://img.shields.io/badge/arXiv-2507.15245-b31b1b.svg)](https://arxiv.org/abs/2507.15245)
+[![Dataset](https://img.shields.io/badge/Hugging%20Face-SPARBench-ffbd21.svg)](https://huggingface.co/datasets/XiaofengAlg/SPARBench)
+[![License: MIT](https://img.shields.io/badge/License-MIT-2563eb.svg)](LICENSE)
+[![Cite](https://img.shields.io/badge/Cite-CITATION.cff-0f766e.svg)](CITATION.cff)
 
-Dataset URL: [SPARBench](https://huggingface.co/datasets/XiaofengAlg/SPARBench)
+[中文说明](README_ZH.md)
 
-An intelligent academic paper retrieval system based on Large Language Model (LLM) agents, providing search, retrieval, and re-ranking capabilities.
+SPAR is a multi-agent scholarly retrieval framework that combines RefChain-based
+query decomposition, query evolution, citation-aware exploration, and
+re-ranking. The accompanying **SPARBench** dataset provides expert-annotated
+relevance labels for systematic evaluation.
+
+> If you use SPAR or SPARBench, please cite the
+> [SPAR paper](https://arxiv.org/abs/2507.15245). A machine-readable citation is
+> available in [CITATION.cff](CITATION.cff).
 
 ![overview](./figs/graph_example.png)
 
@@ -19,7 +29,9 @@ pip install -r requirements.txt
 ### Basic Configuration
 
 1. **Configure API Keys**
-   - Edit [`global_config.py`](global_config.py) to set GPT-related keys and search parameters
+   - Set provider credentials with `OPENAI_API_KEY`, `GOOGLE_SERPER_KEY`, and
+     the optional `S2_API_KEY` environment variables. Never commit API keys.
+   - Edit [`global_config.py`](global_config.py) to set non-secret search parameters
    - For local models, refer to [`local_request_v2.py`](local_request_v2.py) to configure `MODEL_CONFIGS`
 
 2. **Launch Web Interface**
@@ -110,7 +122,8 @@ Preview:
 
 ## 📖 Citation
 
-If you use the SPAR system, please cite our work:
+If you use SPAR, SPARBench, or results produced with the system, please cite
+the accompanying paper:
 
 ```bibtex
 @misc{shi2025sparscholarpaperretrieval,

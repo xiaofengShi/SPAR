@@ -15,7 +15,7 @@ import traceback
 import random
 from global_config import (
     LLM_MODEL_NAME,
-    DO_REFERENCE_
+    DO_REFERENCE_SEARCH,
     DO_FUSION_JUDGE,
     FUSION_TEMP,
     SEARCH_ROUTE,
