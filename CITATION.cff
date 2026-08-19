@@ -5,6 +5,7 @@ type: software
 authors:
   - family-names: Shi
     given-names: Xiaofeng
+    orcid: https://orcid.org/0009-0009-6052-7713
 repository-code: https://github.com/xiaofengShi/SPAR
 url: https://arxiv.org/abs/2507.15245
 license: MIT
