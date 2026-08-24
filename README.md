@@ -2,6 +2,7 @@
 
 [![Paper](https://img.shields.io/badge/arXiv-2507.15245-b31b1b.svg)](https://arxiv.org/abs/2507.15245)
 [![Dataset](https://img.shields.io/badge/Hugging%20Face-SPARBench-ffbd21.svg)](https://huggingface.co/datasets/XiaofengAlg/SPARBench)
+[![Cache](https://img.shields.io/badge/Hugging%20Face-SPAR%20Cache-ffbd21.svg)](https://huggingface.co/datasets/XiaofengAlg/SPAR-arxiv-cache)
 [![License: MIT](https://img.shields.io/badge/License-MIT-2563eb.svg)](LICENSE)
 [![Cite](https://img.shields.io/badge/Cite-CITATION.cff-0f766e.svg)](CITATION.cff)
 
@@ -63,11 +64,30 @@ pip install -r requirements.txt
 
 ### Local Database Acceleration (Optional)
 
-SPAR can use an authorized local SQLite cache when one is available. No public
-cache archive is currently distributed from this repository. Place your cache
-under `database/` and set `db_path` in [`local_db_v2.py`](local_db_v2.py) to the
-local file. Keep object-store signatures, access keys, and other credentials out
-of documentation and version control.
+A validated public snapshot of the scholarly metadata cache is available from
+the [SPAR arXiv cache dataset](https://huggingface.co/datasets/XiaofengAlg/SPAR-arxiv-cache).
+The compressed download is about 403 MB and expands to a 2.16 GB SQLite file
+with 112,581 records.
+
+Install the [Hugging Face CLI](https://huggingface.co/docs/huggingface_hub/guides/cli)
+and Zstandard, then download and unpack the cache:
+
+```bash
+pip install -U huggingface_hub
+# macOS: brew install zstd
+# Ubuntu/Debian: sudo apt-get install zstd
+
+mkdir -p database
+hf download XiaofengAlg/SPAR-arxiv-cache arxiv_data.db.zst \
+  --repo-type dataset \
+  --local-dir database
+zstd -d database/arxiv_data.db.zst -o database/arxiv_data.db
+```
+
+SPAR uses `./database/arxiv_data.db` by default. Set `SPAR_DB_PATH` to use a
+different location. The cache is a best-effort 2025 snapshot; SPAR falls back
+to live scholarly APIs for missing records. See the dataset card for integrity,
+provenance, and licensing details.
 
 ### Graphical Visualization (Optional)
 

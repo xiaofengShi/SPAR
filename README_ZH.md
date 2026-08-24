@@ -2,6 +2,7 @@
 
 [![论文](https://img.shields.io/badge/arXiv-2507.15245-b31b1b.svg)](https://arxiv.org/abs/2507.15245)
 [![数据集](https://img.shields.io/badge/Hugging%20Face-SPARBench-ffbd21.svg)](https://huggingface.co/datasets/XiaofengAlg/SPARBench)
+[![缓存](https://img.shields.io/badge/Hugging%20Face-SPAR%20Cache-ffbd21.svg)](https://huggingface.co/datasets/XiaofengAlg/SPAR-arxiv-cache)
 [![许可证: MIT](https://img.shields.io/badge/License-MIT-2563eb.svg)](LICENSE)
 [![引用](https://img.shields.io/badge/Cite-CITATION.cff-0f766e.svg)](CITATION.cff)
 
@@ -58,8 +59,28 @@ pip install -r requirements.txt
 
 ### 本地数据库加速（可选）
 
-如有获得授权的本地 SQLite 缓存，SPAR 可以使用它加速查询。当前仓库不公开分发缓存文件。请将缓存放在 `database/` 下，并在 [`local_db_v2.py`](local_db_v2.py) 中把 `db_path` 指向该文件。不要把对象存储签名、访问密钥或其他凭据写入文档或提交到版本控制。
+[SPAR arXiv 缓存数据集](https://huggingface.co/datasets/XiaofengAlg/SPAR-arxiv-cache)
+提供经过完整性校验的公开快照。压缩包约 403 MB，解压后为约 2.16 GB、包含
+112,581 条记录的 SQLite 数据库。
 
+安装 [Hugging Face CLI](https://huggingface.co/docs/huggingface_hub/guides/cli)
+和 Zstandard，然后下载并解压：
+
+```bash
+pip install -U huggingface_hub
+# macOS: brew install zstd
+# Ubuntu/Debian: sudo apt-get install zstd
+
+mkdir -p database
+hf download XiaofengAlg/SPAR-arxiv-cache arxiv_data.db.zst \
+  --repo-type dataset \
+  --local-dir database
+zstd -d database/arxiv_data.db.zst -o database/arxiv_data.db
+```
+
+SPAR 默认读取 `./database/arxiv_data.db`。如需使用其他位置，可设置
+`SPAR_DB_PATH`。该缓存是 2025 年的尽力而为快照；记录缺失时，SPAR 会回退到
+在线学术 API。完整性、来源和许可边界请参阅数据集卡片。
 
 ### 图形化可视化（可选）
 

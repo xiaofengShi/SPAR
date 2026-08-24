@@ -217,8 +217,7 @@ class ArxivDatabase:
         self.close()
 
 
-# db_path = "./database/arxiv_data.db"
-db_path = "./database/recovered.db"
+db_path = os.getenv("SPAR_DB_PATH", "./database/arxiv_data.db")
 
 # with ArxivDatabase(db_path) as db:
 #     all_records = db.get_all()
