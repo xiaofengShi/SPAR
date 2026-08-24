@@ -58,12 +58,7 @@ pip install -r requirements.txt
 
 ### 本地数据库加速（可选）
 
-下载本地缓存数据库以提升查询速度：
-
-```bash
-# 下载数据库文件
-mkdir -p database
-```
+如有获得授权的本地 SQLite 缓存，SPAR 可以使用它加速查询。当前仓库不公开分发缓存文件。请将缓存放在 `database/` 下，并在 [`local_db_v2.py`](local_db_v2.py) 中把 `db_path` 指向该文件。不要把对象存储签名、访问密钥或其他凭据写入文档或提交到版本控制。
 
 
 ### 图形化可视化（可选）

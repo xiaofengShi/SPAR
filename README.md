@@ -63,12 +63,11 @@ pip install -r requirements.txt
 
 ### Local Database Acceleration (Optional)
 
-Download local cache database to improve query speed:
-
-```bash
-# Download database file
-mkdir -p database
-```
+SPAR can use an authorized local SQLite cache when one is available. No public
+cache archive is currently distributed from this repository. Place your cache
+under `database/` and set `db_path` in [`local_db_v2.py`](local_db_v2.py) to the
+local file. Keep object-store signatures, access keys, and other credentials out
+of documentation and version control.
 
 ### Graphical Visualization (Optional)
 
