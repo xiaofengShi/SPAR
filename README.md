@@ -23,8 +23,11 @@ relevance labels for systematic evaluation.
 
 ### Requirements
 
+SPAR supports Python 3.9 and newer.
+
 ```bash
 pip install -r requirements.txt
+python -m unittest discover -s tests -v
 ```
 
 ### Basic Configuration
@@ -79,15 +82,18 @@ pip install -U huggingface_hub
 
 mkdir -p database
 hf download XiaofengAlg/SPAR-arxiv-cache arxiv_data.db.zst \
-  --repo-type dataset \
+  --type dataset \
+  --revision 9d09ce50c5dc7a3c8875e92fa601ae93acde6429 \
   --local-dir database
 zstd -d database/arxiv_data.db.zst -o database/arxiv_data.db
 ```
 
 SPAR uses `./database/arxiv_data.db` by default. Set `SPAR_DB_PATH` to use a
-different location. The cache is a best-effort 2025 snapshot; SPAR falls back
-to live scholarly APIs for missing records. See the dataset card for integrity,
-provenance, and licensing details.
+different location. If no database exists, SPAR creates an empty local cache
+and falls back to live scholarly APIs; downloading the snapshot is optional.
+The pinned revision above keeps the published artifact reproducible. The cache
+is a best-effort 2025 snapshot; see the dataset card for integrity, provenance,
+and licensing details.
 
 ### Graphical Visualization (Optional)
 

@@ -7,9 +7,8 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
 import traceback
-from typing import List, Optional, Dict, Any
+from typing import Dict, Any
 import uvicorn
 import sys
 import os
@@ -20,30 +19,9 @@ from pipeline_spar import AcademicSearchTree
 from search_engine import MultiSearchAgent
 
 from log import logger
+from web_models import SearchRequest, SearchResponse
 
 app = FastAPI(title="Scholar Paper Search API with Frontend", version="1.0.0")
-
-# 请求模型
-class SearchRequest(BaseModel):
-    queries: List[str]
-    sources: Optional[List[str]] = ["openalex"]
-    end_date: Optional[str] = ""
-    max_workers: Optional[int] = 3
-    batch_size: Optional[int] = 10
-    google_serper_key: Optional[str] = ""  # 添加Google Serper Key字段
-    use_advanced_search: Optional[bool] = True  # 是否使用高级搜索（包含query改写和rerank）
-    max_depth: Optional[int] = 1  # 搜索树最大深度
-    relevance_doc_num: Optional[int] = 10  # 相关文档数量
-    similarity_threshold: Optional[float] = 0.5  # 相似度阈值
-
-# 响应模型
-class SearchResponse(BaseModel):
-    status: str
-    total_papers: int
-    query_results: Dict[str, List[Dict[str, Any]]]
-    all_papers: Dict[str, Dict[str, Any]]
-    query_source_map: Dict[str, str]
-    search_tree: Optional[Dict[str, Any]] = None  # 搜索树结构（高级搜索模式）
 
 # 初始化搜索引擎
 multi_search_agent = MultiSearchAgent()
@@ -84,17 +62,29 @@ async def search_papers(request: SearchRequest):
     Returns:
         SearchResponse: 搜索结果
     """
+    request_serper_key = (
+        request.google_serper_key.get_secret_value()
+        if request.google_serper_key
+        else ""
+    )
+    had_previous_serper_key = "GOOGLE_SERPER_KEY" in os.environ
+    previous_serper_key = os.environ.get("GOOGLE_SERPER_KEY")
+
     try:
-        logger.info(f"Received search request: {request}")
+        logger.info(
+            "Received search request: query_count=%d, advanced=%s",
+            len(request.queries),
+            request.use_advanced_search,
+        )
 
         # 验证输入
         if not request.queries:
             raise HTTPException(status_code=400, detail="Queries list cannot be empty")
 
         # 临时设置Google Serper Key环境变量
-        if request.google_serper_key:
-            os.environ["GOOGLE_SERPER_KEY"] = request.google_serper_key
-            logger.info(f"Google Serper Key set from request: {request.google_serper_key}")
+        if request_serper_key:
+            os.environ["GOOGLE_SERPER_KEY"] = request_serper_key
+            logger.info("Google Serper API key configured from request")
 
         if request.use_advanced_search:
             # 使用高级搜索（包含query改写、意图判断、rerank等完整pipeline）
@@ -106,6 +96,12 @@ async def search_papers(request: SearchRequest):
     except Exception as e:
         logger.error(f"Search failed: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Search failed: {str(e)}")
+    finally:
+        if request_serper_key:
+            if had_previous_serper_key:
+                os.environ["GOOGLE_SERPER_KEY"] = previous_serper_key
+            else:
+                os.environ.pop("GOOGLE_SERPER_KEY", None)
 
 def standardize_paper_data(paper_data, paper_id=None, source='unknown'):
     """

@@ -55,6 +55,9 @@ class ArxivDatabase:
 
     def connect(self):
         """Establish database connection with optimized settings."""
+        parent_directory = os.path.dirname(self.db_path)
+        if parent_directory:
+            os.makedirs(parent_directory, exist_ok=True)
         self._connection = sqlite3.connect(self.db_path)
         self._connection.execute(
             "PRAGMA journal_mode=WAL")  # Optimize write performance

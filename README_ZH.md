@@ -20,8 +20,11 @@ SPAR 是一个多 Agent 学术检索框架，结合 RefChain 查询拆解、查�
 
 ### 环境要求
 
+SPAR 支持 Python 3.9 及以上版本。
+
 ```bash
 pip install -r requirements.txt
+python -m unittest discover -s tests -v
 ```
 
 ### 基本配置
@@ -73,14 +76,16 @@ pip install -U huggingface_hub
 
 mkdir -p database
 hf download XiaofengAlg/SPAR-arxiv-cache arxiv_data.db.zst \
-  --repo-type dataset \
+  --type dataset \
+  --revision 9d09ce50c5dc7a3c8875e92fa601ae93acde6429 \
   --local-dir database
 zstd -d database/arxiv_data.db.zst -o database/arxiv_data.db
 ```
 
 SPAR 默认读取 `./database/arxiv_data.db`。如需使用其他位置，可设置
-`SPAR_DB_PATH`。该缓存是 2025 年的尽力而为快照；记录缺失时，SPAR 会回退到
-在线学术 API。完整性、来源和许可边界请参阅数据集卡片。
+`SPAR_DB_PATH`。数据库不存在时，SPAR 会自动创建空缓存并回退到在线学术 API，
+因此下载快照并非必需。上面的固定 revision 可保证获取同一发布产物。该缓存是
+2025 年的尽力而为快照；完整性、来源和许可边界请参阅数据集卡片。
 
 ### 图形化可视化（可选）
 
